@@ -2,8 +2,10 @@ import React from 'react'
 
 export default function ClubAndSocities() {
   return (
-    <div>
-      this is clubs and Socities page
+    <div className='pt-[75px] w-full h-full'>
+      <div className='w-full h-full flex justify-center'>
+        <div className="text-4xl font-semibold p-5">Our Clubs & Societies</div>
+      </div>
     </div>
   )
 }

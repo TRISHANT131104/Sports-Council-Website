@@ -8,12 +8,13 @@ import Team from './pages/Team'
 import ClubAndSocities from './pages/ClubAndSocities'
 import Gallery from './pages/Gallery'
 import Contact from './pages/contact'
+import Footer from './components/Footer'
 
 
 function App() {
   return (
     <>
-      <div className='max-w-screen h-screen'>
+      <div className='max-w-screen h-screen font-poppins'>
       <Router>
         <Navbar/>
         <Routes>
@@ -25,6 +26,7 @@ function App() {
           <Route path='/gallery' element={<Gallery/>}/>
           <Route path='/contant' element={<Contact/>}/>
         </Routes>
+        <Footer/>
       </Router>
       </div>
     </>
