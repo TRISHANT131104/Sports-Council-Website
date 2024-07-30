@@ -19,7 +19,7 @@ export default function Navbar() {
     };
   }, []);
   return (
-    <div className={`${isScrolled ? 'bg-black text-white' : 'bg-blue-300 bg-opacity-70'} p-2  flex justify-between items-center fixed w-screen h-18 transition-all duration-300`}>
+    <div className={`${isScrolled ? 'bg-black text-white' : 'bg-blue-300 bg-opacity-0'} p-2  flex justify-between items-center fixed w-screen h-18 transition-all duration-300`}>
       <div>
       <img src={sports_logo} alt="Logo" width={60} />
       </div>

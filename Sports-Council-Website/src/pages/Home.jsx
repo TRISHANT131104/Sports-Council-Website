@@ -4,8 +4,8 @@ import { motion } from "framer-motion"
 
 export default function Home() {
   return (
-    <div className="w-full overflow-x-hidden">
-      <div className="z-[-1] relative w-full h-screen bg-cover bg-center" style={{ backgroundImage: `url(${homeBG})` }}>
+    <div className=" z-[-1] relative w-full overflow-x-hidden">
+      <div className=" w-full h-screen bg-cover bg-center" style={{ backgroundImage: `url(${homeBG})` }}>
         <motion.div className='ml-24 h-screen flex flex-col items-start justify-center'
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
