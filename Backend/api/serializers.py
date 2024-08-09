@@ -9,10 +9,8 @@ class FacilitySerializer(serializers.ModelSerializer):
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
-        pass
-        # model = Event
-        # fields = ('id','Title', 'Description','Img')
-
+        model = Event
+        fields = ('id','Title', 'Description','Img')
 
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
@@ -33,3 +31,18 @@ class GalleryImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = GalleryImage
         fields = ('id', 'Img')
+
+class UpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Update
+        fields = ('Title','Link')
+
+class StatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Stat
+        fields = ('Stat_name', 'Stat_number')
+
+class MessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = ('Name', 'Email', 'Phone_Number', 'Message')

@@ -11,6 +11,7 @@ import Contact from './pages/contact'
 import Footer from './components/Footer'
 import { DisplayProvider } from './context/DisplayContext'
 import ClubDetail from './pages/ClubDetail'
+import EventDetail from './pages/EventDetail'
 
 
 function App() {
@@ -24,11 +25,12 @@ function App() {
             <Route path='/' element={<Home/>}/>
             <Route path='/facilities' element={<Facilities/>}/>
             <Route path='/events' element={<Events/>}/>
+            <Route path='/events/:id' element={<EventDetail/>}/>
             <Route path='/team' element={<Team/>}/>
             <Route path='/clubsAndSocities' element={<ClubAndSocities/>}/>
             <Route path="/clubsAndSocieties/:id" element={<ClubDetail/>} />
             <Route path='/gallery' element={<Gallery/>}/>
-            <Route path='/contant' element={<Contact/>}/>
+            <Route path='/contact' element={<Contact/>}/>
           </Routes>
           <Footer/>
         </DisplayProvider>

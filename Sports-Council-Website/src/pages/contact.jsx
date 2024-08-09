@@ -1,6 +1,8 @@
-import React from 'react'
+import DisplayContext from '../context/DisplayContext'
+import { useContext, useEffect } from 'react'
 
 export default function contact() {
+  const { SaveMessage } = useContext(DisplayContext);
   return (
     <div className='pt-[75px] w-full p-20'>
       <div className='w-full h-full flex justify-center'>
@@ -24,7 +26,7 @@ export default function contact() {
                 <div className='text-md px-4 py-2 bg-gray-500 bg-opacity-30 rounded-full w-full text-center'>Contact Us</div>
               </div>
             </div>
-            <div className='flex flex-col m-5 w-[600px] justify-between py-10'>
+            <form onSubmit={SaveMessage} className='flex flex-col m-5 w-[600px] justify-between py-10'>
               <div className=''>
                 <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-500 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Name" required=""/>
               </div>
@@ -33,12 +35,12 @@ export default function contact() {
                 <input type="number" name="phone" id="phone" className="bg-gray-50 border border-gray-500 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5" placeholder="Phone Number" required=""/>
               </div>
               <div className=''>
-                <textarea id="message" rows="6" className="bg-gray-50 border border-gray-500 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Message Here..."></textarea>
+                <textarea id="message" name='message' rows="6" className="bg-gray-50 border border-gray-500 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Message Here..."></textarea>
               </div>
               <div>
                 <button type="submit" className='w-full bg-black text-white py-3 rounded-full'>Send Message</button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>

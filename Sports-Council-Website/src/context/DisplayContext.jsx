@@ -34,6 +34,24 @@ export const DisplayProvider = ({ children }) => {
         : null
     );
 
+    let [events, setEvents] = useState(() =>
+        Cookies.get('events')
+        ? JSON.parse(Cookies.get('events'))
+        : null
+    );
+
+    let [updates, setUpdates] = useState(() =>
+        Cookies.get('events')
+        ? JSON.parse(Cookies.get('events'))
+        : null
+    );
+
+    let [stats, setStats] = useState(() =>
+        Cookies.get('stats')
+        ? JSON.parse(Cookies.get('stats'))
+        : null
+    );
+
     let getFacilities = () => {
         axios.get("http://127.0.0.1:8000/api/facilities/")
             .then((response) => {
@@ -93,17 +111,82 @@ export const DisplayProvider = ({ children }) => {
         })
     }
 
+    let getEvents = () => {
+        axios.get("http://127.0.0.1:8000/api/events/")
+            .then((response) => {
+                console.log(response.data)
+                setEvents(response.data);
+                Cookies.set('events', JSON.stringify(response.data));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    let getUpdates = () => {
+        axios.get("http://127.0.0.1:8000/api/updates/")
+            .then((response) => {
+                console.log(response.data)
+                setUpdates(response.data);
+                Cookies.set('updates', JSON.stringify(response.data));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    let getStats = () => {
+        axios.get("http://127.0.0.1:8000/api/stats/")
+            .then((response) => {
+                console.log(response.data)
+                setStats(response.data);
+                Cookies.set('stats', JSON.stringify(response.data));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    let SaveMessage = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = {
+            Name: formData.get('name'),
+            Email: formData.get('email'),
+            Phone_Number: formData.get('phone'),
+            Message: formData.get('message')
+        };
+
+        console.log(data);
+    
+        axios.post('http://localhost:8000/api/messages/', data)
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
+
     const ContextData = {
-        facilities: facilities,
-        getFacilities: getFacilities,
-        team:team,
-        getTeams: getTeams,
+        getFacilities,
+        facilities,
+        getTeams,
+        team,
+        getGallery,
         gallery: gallery,
-        getGallery: getGallery,
+        getClubs,
         clubs,
-        getClubs: getClubs,
-        getClubMembers: getClubMembers,
-        clubMembers: clubMembers,
+        getClubMembers,
+        clubMembers,
+        getEvents,
+        events,
+        getUpdates,
+        updates,
+        getStats,
+        stats,
+        SaveMessage,
     };
 
     return (

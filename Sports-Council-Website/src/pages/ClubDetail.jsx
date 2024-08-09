@@ -39,7 +39,7 @@ export default function ClubDetail() {
   );
 
   return (
-    <div className='pt-[75px] w-full h-max'>
+    <div className='pt-[75px] w-full h-max min-h-full'>
       <div className='w-full h-full flex flex-col justify-center items-center p-10'>
         {club ? (
           <>
@@ -49,18 +49,35 @@ export default function ClubDetail() {
           <div>Loading...</div>
         )}
         <div className='w-full flex flex-col'>
-          <div className='flex flex-col justify-center items-center p-10'>
-            <div className='text-4xl font-semibold m-10'>Council Head</div>
-            <div className='flex'>
-              {renderMembers('club_head')}
+          <div className='flex w-full justify-center'>
+            {
+            clubMembers?.filter(member => member.Role === 'Coach').length!=0 &&
+            <div className='flex flex-col justify-center items-center p-10'>
+              <div className='text-4xl font-semibold m-10'>Coach</div>
+              <div className='flex'>
+                {renderMembers('Coach')}
+              </div>
             </div>
-          </div>
-          <div className='flex flex-col justify-center items-center p-10'>
-            <div className='text-4xl font-semibold m-10'>Council Members</div>
-            <div className='grid grid-cols-3 gap-7'>
-              {renderMembers('club_member')}
+            }
+            {
+            clubMembers?.filter(member => member.Role === 'club_head').length!=0 &&
+            <div className='flex flex-col justify-center items-center p-10'>
+              <div className='text-4xl font-semibold m-10'>Club Head</div>
+              <div className='flex'>
+                {renderMembers('club_head')}
+              </div>
             </div>
+            }
           </div>
+            {
+            clubMembers?.filter(member => member.Role === 'club_member').length!=0 &&
+            <div className='flex flex-col justify-center items-center p-10'>
+              <div className='text-4xl font-semibold m-10'>Club Members</div>
+              <div className='grid grid-cols-3 gap-7'>
+                {renderMembers('club_member')}
+              </div>
+            </div>
+            }
         </div>
       </div>
     </div>

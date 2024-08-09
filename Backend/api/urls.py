@@ -11,6 +11,9 @@ urlpatterns = [
     path('clubs/', GetClubsAndSocieties.as_view()),
     path('clubs/<int:club_id>/', GetClubsAndSocietyTeams.as_view()),
     path('gallery/', GetGallery.as_view()),
+    path('updates/', GetUpdates.as_view()),
+    path('stats/', GetStats.as_view()),
+    path('messages/', Messages.as_view()),
 ]
 
 

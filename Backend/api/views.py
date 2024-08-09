@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from rest_framework.generics import ListAPIView,CreateAPIView,DestroyAPIView,RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListAPIView,ListCreateAPIView
 from .models import *
 from .serializers import *
 
@@ -12,15 +12,19 @@ def hello_world(request):
 class GetFacilities(ListAPIView):
     queryset = Facility.objects.all()
     serializer_class = FacilitySerializer
+
 class GetEvents(ListAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+
 class GetTeam(ListAPIView):
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
+
 class GetClubsAndSocieties(ListAPIView):
     queryset = Club.objects.all()
     serializer_class = ClubSerializer
+    
 class GetClubsAndSocietyTeams(ListAPIView):
     serializer_class = ClubTeamSerializer
 
@@ -31,3 +35,15 @@ class GetClubsAndSocietyTeams(ListAPIView):
 class GetGallery(ListAPIView):
     queryset = GalleryImage.objects.all()
     serializer_class = GalleryImageSerializer
+
+class GetUpdates(ListAPIView):
+    queryset = Update.objects.all()
+    serializer_class = UpdateSerializer
+
+class GetStats(ListAPIView):
+    queryset = Stat.objects.all()
+    serializer_class = StatSerializer
+
+class Messages(ListCreateAPIView):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
