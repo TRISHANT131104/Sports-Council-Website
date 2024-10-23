@@ -17,7 +17,7 @@ export default function ClubAndSocieties() {
           {clubs && clubs.length > 0 ? (
             clubs.map((club) => (
               <div key={club.id}>
-                <Link to={`/clubsAndSocieties/${club.id}`} className="mb-5 border p-4 flex flex-col justify-center items-center h-full w-full border-black">
+                <Link to={`/clubsAndSocieties/${club.id}`} className="mb-5 border p-4 flex flex-col justify-center items-center h-full w-full border-black shadow-md hover:shadow-2xl transition-all duration-300">
                   <img src={`${club.Club_logo}`} alt={club.Title} className="w-[400px] h-auto m-5 p-10" />
                   <div className="text-4xl font-semibold">{club.Club_Name}</div>
                 </Link>

@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from rest_framework.generics import ListAPIView,ListCreateAPIView
 from .models import *
 from .serializers import *
+from rest_framework.response import Response
+from rest_framework import status
 
 
 # Create your views here.
@@ -33,8 +35,21 @@ class GetClubsAndSocietyTeams(ListAPIView):
         return ClubTeam.objects.filter(Club=club_id)
     
 class GetGallery(ListAPIView):
-    queryset = GalleryImage.objects.all()
-    serializer_class = GalleryImageSerializer
+    serializer_class = GalleryImageSerializer  # default serializer class for this view
+
+    def get(self, request, *args, **kwargs):
+        gallery_images = GalleryImage.objects.all()
+        hall_of_fame = HallOfFame.objects.all()
+
+        gallery_serializer = GalleryImageSerializer(gallery_images, many=True, context={'request': request})
+        hall_of_fame_serializer = HallOfFameSerializer(hall_of_fame, many=True, context={'request': request})
+
+        response_data = {
+            'Gallery': gallery_serializer.data,
+            'HallOfFame': hall_of_fame_serializer.data
+        }
+
+        return Response(response_data, status=status.HTTP_200_OK)
 
 class GetUpdates(ListAPIView):
     queryset = Update.objects.all()
@@ -47,3 +62,11 @@ class GetStats(ListAPIView):
 class Messages(ListCreateAPIView):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
+    
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

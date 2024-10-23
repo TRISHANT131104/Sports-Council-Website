@@ -29,14 +29,7 @@ export default function Team() {
   return (
     <div className='pt-[75px] w-full h-max'>
       <div className='w-full h-full flex flex-col items-center justify-start'>
-        <div className="text-4xl font-semibold p-5">Our Team</div>
         <div className='w-full flex flex-col'>
-          <div className='flex flex-col justify-center items-center p-10'>
-            <div className='text-4xl font-semibold m-10'>Staff</div>
-            <div className='grid grid-cols-3 gap-7'>
-              {renderMembers('staff')}
-            </div>
-          </div>
           <div className='flex flex-col justify-center items-center p-10'>
             <div className='text-4xl font-semibold m-10'>Council Head</div>
             <div className='flex'>
@@ -51,7 +44,6 @@ export default function Team() {
           </div>
         </div>
       </div>
-      
     </div>
   );
 }

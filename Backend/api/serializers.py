@@ -46,3 +46,13 @@ class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = ('Name', 'Email', 'Phone_Number', 'Message')
+
+
+class HallOfFameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HallOfFame
+        fields = ('id', 'Img')
+
+    def get_Img(self, obj):
+        request = self.context.get('request')
+        return request.build_absolute_uri(obj.Img.url)

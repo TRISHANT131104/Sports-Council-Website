@@ -39,6 +39,7 @@ export default function contact() {
               </div>
               <div>
                 <button type="submit" className='w-full bg-black text-white py-3 rounded-full'>Send Message</button>
+                {/* <a href="mailto:trishanttalluri@gmail.com?subject=Your%20Subject&body=Your%20message%20goes%20here">Send Email</a> */}
               </div>
             </form>
           </div>

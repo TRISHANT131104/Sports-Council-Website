@@ -3,6 +3,7 @@ from .models import *
 
 # Register your models here.
 admin.site.register(GalleryImage)
+admin.site.register(HallOfFame)
 # admin.site.register(Stat)
 
 

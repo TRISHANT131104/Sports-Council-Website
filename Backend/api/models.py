@@ -45,7 +45,7 @@ class Team(models.Model):
     Role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='council_member')
     Name = models.CharField(max_length=100, null=True)
     Img = models.ImageField(upload_to='images/Team/')
-    phoneNumber = models.CharField(max_length=10)
+    phoneNumber = models.CharField(max_length=15)
     EmailID = models.EmailField(max_length=50)
 
     def delete(self, *args, **kwargs):
@@ -84,7 +84,7 @@ class ClubTeam(models.Model):
     Role = models.CharField(max_length=20, choices=CLUB_ROLE_CHOICES, default='club_member')
     Name = models.CharField(max_length=100)
     Img = models.ImageField(upload_to='images/ClubTeams/')
-    phoneNumber = models.CharField(max_length=10)
+    phoneNumber = models.CharField(max_length=15)
     EmailID = models.EmailField(max_length=50)
 
     def delete(self, *args, **kwargs):
@@ -117,10 +117,19 @@ class Update(models.Model):
 class Message(models.Model):
     Name = models.CharField(max_length=200, default="")
     Email = models.EmailField()
-    Phone_Number = models.IntegerField()
+    Phone_Number = models.CharField(max_length=15)
     Message = models.TextField(max_length=2000, default="")
 
 class Stat(models.Model):
     Stat_name = models.CharField(max_length=100, default="")
     Stat_number = models.CharField(max_length=100, default="")
+
+class HallOfFame(models.Model):
+    Img = models.ImageField(upload_to='images/halloffame/')
+
+    def delete(self, *args, **kwargs):
+        if self.Img and os.path.isfile(self.Img.path):
+            os.remove(self.Img.path)
+        super().delete(*args, **kwargs)
+
 

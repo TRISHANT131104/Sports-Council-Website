@@ -22,6 +22,11 @@ export const DisplayProvider = ({ children }) => {
         ? JSON.parse(Cookies.get('gallery'))
         : null
     );
+    let [hallOfFame, setHallOfFame] = useState(() =>
+        Cookies.get('hallOfFame')
+        ? JSON.parse(Cookies.get('hallOfFame'))
+        : null
+    );
     let [clubs, setClubs] = useState(() =>
         Cookies.get('clubs')
         ? JSON.parse(Cookies.get('clubs'))
@@ -79,9 +84,11 @@ export const DisplayProvider = ({ children }) => {
     let getGallery = () => {
         axios.get("http://127.0.0.1:8000/api/gallery/")
         .then((response) => {
-            console.log(response.data);
-            setGallery(response.data);
-            Cookies.set('gallery', JSON.stringify(response.data));
+            console.log(response.data.Gallery, response.data.HallOfFame);
+            setGallery(response.data.Gallery);
+            setHallOfFame(response.data.HallOfFame)
+            Cookies.set('gallery', JSON.stringify(response.data.Gallery));
+            Cookies.set('hallOfFame', JSON.stringify(response.data.HallOfFame));
         })
         .catch((error) => {
             console.log(error);
@@ -175,7 +182,8 @@ export const DisplayProvider = ({ children }) => {
         getTeams,
         team,
         getGallery,
-        gallery: gallery,
+        gallery,
+        hallOfFame,
         getClubs,
         clubs,
         getClubMembers,
