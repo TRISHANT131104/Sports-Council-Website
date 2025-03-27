@@ -132,4 +132,11 @@ class HallOfFame(models.Model):
             os.remove(self.Img.path)
         super().delete(*args, **kwargs)
 
+class Rule(models.Model):
+    club = models.ForeignKey(Club, on_delete=models.CASCADE)
+    rule = models.TextField()
+
+    def __str__(self):
+        return f"Rule for {self.club.Club_Name}: {self.rule[:50]}..."
+
 

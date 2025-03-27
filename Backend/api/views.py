@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework.generics import ListAPIView,ListCreateAPIView
+from rest_framework.views import APIView
 from .models import *
 from .serializers import *
 from rest_framework.response import Response
@@ -27,12 +28,18 @@ class GetClubsAndSocieties(ListAPIView):
     queryset = Club.objects.all()
     serializer_class = ClubSerializer
     
-class GetClubsAndSocietyTeams(ListAPIView):
-    serializer_class = ClubTeamSerializer
+class GetClubsAndSocietyTeams(APIView):
+    def get(self, request, club_id):
+        club_teams = ClubTeam.objects.filter(Club=club_id)
+        rules = Rule.objects.filter(club=club_id)
 
-    def get_queryset(self):
-        club_id = self.kwargs.get('club_id')
-        return ClubTeam.objects.filter(Club=club_id)
+        club_teams_serializer = ClubTeamSerializer(club_teams, many=True)
+        rules_serializer = RuleSerializer(rules, many=True)
+
+        return Response({
+            "club_members": club_teams_serializer.data,
+            "rules": rules_serializer.data
+        })
     
 class GetGallery(ListAPIView):
     serializer_class = GalleryImageSerializer  # default serializer class for this view

@@ -12,22 +12,35 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
-import pymysql
-
+import environ
+from django.core.exceptions import ImproperlyConfigured
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env()
+environ.Env.read_env(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
+# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&4y88nj(k^mcnt&y$83=4sm1(k^@teq&im$c67*@x8m3%=*bph'
+SECRET_KEY = env("SECRET_KEY")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=True)
 
-ALLOWED_HOSTS = []
+if not DEBUG:
+    ALLOWED_HOSTS = []
+    HOST_URL = env('HOST_URL')
+    if HOST_URL:
+        ALLOWED_HOSTS.append(HOST_URL)
+        CSRF_TRUSTED_ORIGINS = [f"https://{HOST_URL}"]
+    else:
+        raise ImproperlyConfigured("HOST_URL environment variable is not set")
+else:
+    ALLOWED_HOSTS = ['localhost','127.0.0.1','interiit2024.iiti.ac.in','10.14.5.204']
+    CSRF_TRUSTED_ORIGINS = ["https://interiit2024.iiti.ac.in","http://127.0.0.1:8000","http://localhost:8000","http://10.14.5.204:8000"]
 
 
 # Application definition
@@ -85,29 +98,28 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
-pymysql.install_as_MySQLdb()
 
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Sports-Council',
-        'USER': 'root',
-        'PASSWORD': 'Amrita@128',
-        'HOST': 'localhost',  # or '127.0.0.1' for localhost
-        'PORT': '3306',       # default MySQL port
-        'OPTIONS': {
-            'charset': 'utf8mb4',
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'Sports-Council',
+#         'USER': 'root',
+#         'PASSWORD': 'Amrita@128',
+#         'HOST': 'localhost',  # or '127.0.0.1' for localhost
+#         'PORT': '3306',       # default MySQL port
+#         'OPTIONS': {
+#             'charset': 'utf8mb4',
+#         },
+#     }
+# }
 
 
 # Password validation
@@ -144,16 +156,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/backend/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static") 
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'staticfiles')
+]
+
+MEDIA_URL = "/backend/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Base directory of your project
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Directory to store media files
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None

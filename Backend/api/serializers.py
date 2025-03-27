@@ -56,3 +56,8 @@ class HallOfFameSerializer(serializers.ModelSerializer):
     def get_Img(self, obj):
         request = self.context.get('request')
         return request.build_absolute_uri(obj.Img.url)
+    
+class RuleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rule
+        fields = ('id', 'club', 'rule')

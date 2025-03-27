@@ -39,3 +39,8 @@ class Update(admin.ModelAdmin):
 class Stat(admin.ModelAdmin):
     list_display = ['Stat_name']
 
+@admin.register(Rule)
+class RulesAdmin(admin.ModelAdmin):
+    list_display = ['club', 'rule']
+    search_fields = ['club__Club_Name', 'rule']
+
