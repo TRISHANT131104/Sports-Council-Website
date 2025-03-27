@@ -1,18 +1,18 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <div className='w-full h-max bg-gray-200 flex flex-col'>
-      <div className='flex justify-between p-5 mb-10'>
-        <div className='flex flex-col justify-between gap-2'>
-            <div className='text-2xl'>
-                Let's Keep  in touch!
-            </div>
-            <div>
-                Find us on any of these platforms, we respond in 1-2 days.
-            </div>
-            <div className='flex gap-4 justify-start items-center'>
+    <div className="w-full bg-gray-200 flex flex-col">
+      <div className="flex flex-col md:flex-row justify-between p-5 md:p-8 gap-5">
+        {/* Left Section */}
+        <div className="flex flex-col gap-2 text-center md:text-left">
+          <div className="text-2xl font-semibold">Let's Keep in Touch!</div>
+          <div className="text-gray-600">
+            Find us on any of these platforms, we respond in 1-2 days.
+          </div>
+          {/* Social Icons */}
+          <div className='flex gap-4 justify-center md:justify-start'>
                 <Link to=''>
                   <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 256 256"><path fill="#1877f2" d="M256 128C256 57.308 198.692 0 128 0S0 57.308 0 128c0 63.888 46.808 116.843 108 126.445V165H75.5v-37H108V99.8c0-32.08 19.11-49.8 48.348-49.8C170.352 50 185 52.5 185 52.5V84h-16.14C152.959 84 148 93.867 148 103.99V128h35.5l-5.675 37H148v89.445c61.192-9.602 108-62.556 108-126.445"/><path fill="#fff" d="m177.825 165l5.675-37H148v-24.01C148 93.866 152.959 84 168.86 84H185V52.5S170.352 50 156.347 50C127.11 50 108 67.72 108 99.8V128H75.5v37H108v89.445A129 129 0 0 0 128 256a129 129 0 0 0 20-1.555V165z"/></svg>
                 </Link>
@@ -24,22 +24,29 @@ export default function Footer() {
                 </Link>
             </div>
         </div>
-        <div className='flex justify-center items-center'>
-            <Link to='/contact' className='text-2xl py-3 px-5 rounded-full bg-gray-400 hover:bg-black hover:text-white transition-all duration-300 cursor-pointer'>Contact Us</Link>
+
+        {/* Contact Button */}
+        <div className="flex justify-center items-center">
+          <Link to="/contact" className="text-2xl py-3 px-6 rounded-full bg-gray-400 hover:bg-black hover:text-white transition-all duration-300 cursor-pointer">
+            Contact Us
+          </Link>
         </div>
       </div>
-      <hr className='border-1 border-gray-400'/>
-      <div className='flex flex-col justify-center items-center p-5'>
-        <div>
-            © Copyright The Sports Council | IIT Indore
-        </div>
-        <div>
-            All Rights Reserved
-        </div>
-        <div>
-            Student Affairs Website: <a href="https://studentaffairs.iiti.ac.in/" target='blank' className='text-blue-500 hover:underline'>Student Affairs</a>
+
+      {/* Horizontal Line */}
+      <hr className="border-gray-400 w-full" />
+
+      {/* Bottom Section */}
+      <div className="flex flex-col items-center text-center p-4">
+        <div className="font-semibold">© Copyright The Sports Council | IIT Indore</div>
+        <div className="text-gray-600">All Rights Reserved</div>
+        <div className="text-gray-600">
+          Student Affairs Website: 
+          <a href="https://studentaffairs.iiti.ac.in/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline ml-1">
+            Student Affairs
+          </a>
         </div>
       </div>
     </div>
-  )
+  );
 }

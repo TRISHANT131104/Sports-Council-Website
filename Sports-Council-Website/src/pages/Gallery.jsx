@@ -3,38 +3,58 @@ import { useContext, useEffect } from 'react';
 
 export default function Gallery() {
   const { gallery, hallOfFame, getGallery } = useContext(DisplayContext);
-  
+
   useEffect(() => {
     getGallery();
   }, []);
+
   return (
-    <div className='pt-[75px] w-full h-max'>
-      <div className='w-full h-full flex flex-col justify-center p-10 items-center'>
-      <div className="text-4xl font-semibold p-5">Hall of Fame</div>
-        <div className='grid grid-cols-4 gap-7'>
+    <div className='pt-[75px] w-full h-max min-h-screen px-5'>
+      <div className='w-full h-full flex flex-col justify-center items-center'>
+
+        {/* Hall of Fame Section */}
+        <h2 className="text-3xl md:text-4xl font-semibold p-5 text-center">Hall of Fame</h2>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7 w-full max-w-6xl'>
           {hallOfFame && hallOfFame.length > 0 ? (
             hallOfFame.map((image) => (
-                <div key={image.id} className="mb-5 border flex justify-center items-center h-full w-full border-black shadow-md hover:shadow-2xl transition-all duration-300">
-                    <img src={`${image.Img}`} alt={image.Title} className="w-[400px] h-auto p-5" />
-                </div>
+              <div 
+                key={image.id} 
+                className="border flex justify-center items-center border-black shadow-md hover:shadow-xl transition-all duration-300 rounded-lg overflow-hidden"
+              >
+                <img 
+                  src={`${image.Img}`} 
+                  alt={image.Title} 
+                  className="w-full max-w-xs sm:max-w-sm md:max-w-md h-auto p-3"
+                />
+              </div>
             ))
-        ) : (
-            <div>Loading...</div>
-        )}
+          ) : (
+            <div className="text-lg font-semibold">Loading...</div>
+          )}
         </div>
-        <div className="text-4xl font-semibold p-5">Gallery</div>
-        <div className='grid grid-cols-4 gap-7'>
+
+        {/* Gallery Section */}
+        <h2 className="text-3xl md:text-4xl font-semibold p-5 mt-10 text-center">Gallery</h2>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7 w-full max-w-6xl'>
           {gallery && gallery.length > 0 ? (
             gallery.map((image) => (
-                <div key={image.id} className="mb-5 border flex justify-center items-center h-full w-full border-black shadow-md hover:shadow-2xl transition-all duration-300">
-                    <img src={`${image.Img}`} alt={image.Title} className="w-[400px] h-auto p-5" />
-                </div>
+              <div 
+                key={image.id} 
+                className="border flex justify-center items-center border-black shadow-md hover:shadow-xl transition-all duration-300 rounded-lg overflow-hidden"
+              >
+                <img 
+                  src={`${image.Img}`} 
+                  alt={image.Title} 
+                  className="w-full max-w-xs sm:max-w-sm md:max-w-md h-auto p-3"
+                />
+              </div>
             ))
-        ) : (
-            <div>Loading...</div>
-        )}
+          ) : (
+            <div className="text-lg font-semibold">Loading...</div>
+          )}
         </div>
+
       </div>
     </div>
-  )
+  );
 }

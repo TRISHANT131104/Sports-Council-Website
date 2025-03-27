@@ -45,11 +45,16 @@ export const DisplayProvider = ({ children }) => {
         axios.get(`${BASE_URL}/facilities/`)
             .then((response) => {
                 console.log(response.data);
-                setFacilities(response.data);
-                Cookies.set('facilities', JSON.stringify(response.data));
+                const formattedData = response.data.map(facility => ({
+                    ...facility,
+                    rules: facility.rules.map(rule => rule.rule)
+                }));
+                setFacilities(formattedData);
+                Cookies.set('facilities', JSON.stringify(formattedData));
             })
             .catch((error) => console.log(error));
     };
+    
 
     let getTeams = () => {
         axios.get(`${BASE_URL}/teams/`)

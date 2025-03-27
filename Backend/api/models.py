@@ -9,6 +9,9 @@ class Facility(models.Model):
     Description = models.CharField(max_length=2000, default="")
     Img = models.ImageField(upload_to='images/facilities/', default='')
 
+    def __str__(self):
+        return self.Title
+
     def delete(self, *args, **kwargs):
         if self.Img and os.path.isfile(self.Img.path):
             os.remove(self.Img.path)
@@ -61,6 +64,9 @@ def delete_team_image(sender, instance, **kwargs):
 class Club(models.Model):
     Club_Name = models.CharField(max_length=50)
     Club_logo = models.ImageField(upload_to='images/Clubs/')
+
+    def __str__(self):
+        return self.Club_Name
 
     def delete(self, *args, **kwargs):
         if self.Club_logo and os.path.isfile(self.Club_logo.path):
@@ -138,5 +144,13 @@ class Rule(models.Model):
 
     def __str__(self):
         return f"Rule for {self.club.Club_Name}: {self.rule[:50]}..."
+    
+class FacilityRule(models.Model):
+    facility = models.ForeignKey(Facility, on_delete=models.CASCADE)
+    rule = models.TextField()
+
+    def __str__(self):
+        return f"Rule for {self.facility.Title}: {self.rule[:50]}..."
+
 
 

@@ -65,7 +65,7 @@ export default function Navbar() {
       
       {/* Mobile Menu Button */}
       <div className='md:hidden flex items-center'>
-        <button onClick={() => setMenuOpen(!menuOpen)} className='text-white text-3xl focus:outline-none'>
+        <button onClick={() => setMenuOpen(!menuOpen)} className='text-black text-3xl focus:outline-none'>
           {menuOpen ? <FiX /> : <FiMenu />}
         </button>
       </div>

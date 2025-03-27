@@ -2,10 +2,17 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from .models import *
 
+class FacilityRuleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FacilityRule
+        fields = ['id', 'rule']
+
 class FacilitySerializer(serializers.ModelSerializer):
+    rules = FacilityRuleSerializer(source='facilityrule_set', many=True, read_only=True)
+
     class Meta:
         model = Facility
-        fields = ('id','Title', 'Description','Img')
+        fields = ['id', 'Title', 'Description', 'Img', 'rules']
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:

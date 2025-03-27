@@ -13,7 +13,7 @@ def hello_world(request):
     return HttpResponse("Hello, World!")
 
 class GetFacilities(ListAPIView):
-    queryset = Facility.objects.all()
+    queryset = Facility.objects.prefetch_related('facilityrule_set').all()
     serializer_class = FacilitySerializer
 
 class GetEvents(ListAPIView):
@@ -42,7 +42,7 @@ class GetClubsAndSocietyTeams(APIView):
         })
     
 class GetGallery(ListAPIView):
-    serializer_class = GalleryImageSerializer  # default serializer class for this view
+    serializer_class = GalleryImageSerializer
 
     def get(self, request, *args, **kwargs):
         gallery_images = GalleryImage.objects.all()
